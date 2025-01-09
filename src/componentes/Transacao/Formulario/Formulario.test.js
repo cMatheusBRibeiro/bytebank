@@ -7,25 +7,35 @@ describe("Deve renderizar um campo de input", () => {
     render(<Formulario />);
   });
 
-  test("no documento", () => {
+  it("no documento", () => {
     const campoTexto = screen.getByPlaceholderText("Digite um valor");
     expect(campoTexto).toBeInTheDocument();
   });
 
-  test("com o type number", () => {
+  it("com o type number", () => {
     const campoTexto = screen.getByPlaceholderText("Digite um valor");
     expect(campoTexto).toHaveAttribute("type", "number");
   });
 
-  test("que pode ser preenchido", () => {
+  it("que pode ser preenchido", () => {
     const campoTexto = screen.getByPlaceholderText("Digite um valor");
     userEvent.type(campoTexto, "50");
     expect(campoTexto).toHaveValue(50);
   });
 
-  test("que rejeite textos", () => {
+  it("que rejeite textos", () => {
     const campoTexto = screen.getByPlaceholderText("Digite um valor");
     userEvent.type(campoTexto, "Bom dia");
     expect(campoTexto).toHaveValue(null);
   });
+});
+
+it("Deve chamar um evento onSubmit ao clicar em realizar transação", () => {
+  const realizarTransacao = jest.fn();
+
+  render(<Formulario realizarTransacao={realizarTransacao} />);
+  const botao = screen.getByRole("button");
+
+  userEvent.click(botao);
+  expect(realizarTransacao).toHaveBeenCalledTimes(1);
 });
