@@ -49,9 +49,14 @@ export default function Formulario({ realizarTransacao }) {
         value={valor.valor}
         name="valor"
         id="valor"
+        data-testid="input-valor"
         placeholder="Digite um valor"
       />
-      <button className={estilos.botao} type="submit">
+      <button
+        className={estilos.botao}
+        data-testid="botao-submit"
+        type="submit"
+      >
         Realizar transação
       </button>
     </form>
